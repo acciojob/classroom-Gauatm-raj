@@ -24,4 +24,23 @@ public class TeacherService {
         teacherRepository.addTeacher(t);
     }
 
+   public void addStudentToTeacher(String student,String teacher){
+        Teacher t=teacherRepository.getByName(teacher);
+        t.getStudents().add(student);
+
+       // teacherRepository.addStudentInTeacher(student,teacher);
+   }
+
+   public List<String> getStudentName(String teacher){
+        return teacherRepository.getStudentName(teacher);
+   }
+
+   public void deleteByName(String name){
+         teacherRepository.deleteByName(name);
+   }
+
+   public void deleteAll(){
+        teacherRepository.deleteall();
+   }
+
 }

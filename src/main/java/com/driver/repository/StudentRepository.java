@@ -2,6 +2,7 @@ package com.driver.repository;
 
 import com.driver.Student;
 import com.driver.Teacher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,6 +11,9 @@ import java.util.List;
 
 @Repository
 public class StudentRepository {
+
+
+
     HashMap<String, Student> studentDB;
 
 
@@ -35,6 +39,10 @@ public class StudentRepository {
       studentDB.put(name,s);
    }
 
+//   public void addStudentToTeacher(String student,String teacher){
+//        Student s=studentDB.get(student);
+//        s.getTeachers().add(teacher);
+//   }
 
 
 }

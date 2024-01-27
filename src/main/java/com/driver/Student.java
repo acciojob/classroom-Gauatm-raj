@@ -9,17 +9,17 @@ public class Student {
     private int age;
     private double averageScore;
 
-    List<Teacher> teachers;
+    List<String> teachers=new ArrayList<>();
 
     public Student(){
 
     }
 
-    public Student(String name, int age, double averageScore, List<Teacher> teachers) {
+    public Student(String name, int age, double averageScore) {
         this.name = name;
         this.age = age;
         this.averageScore = averageScore;
-        this.teachers = new ArrayList<>();
+        this.teachers.add("");
     }
 
     public String getName() {
@@ -46,11 +46,11 @@ public class Student {
         this.averageScore = averageScore;
     }
 
-    public List<Teacher> getTeachers() {
+    public List<String> getTeachers() {
         return teachers;
     }
 
-    public void setTeachers(List<Teacher> teachers) {
+    public void setTeachers(List<String> teachers) {
         this.teachers = teachers;
     }
 }

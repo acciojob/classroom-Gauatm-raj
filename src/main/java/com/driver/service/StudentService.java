@@ -24,5 +24,11 @@ public class StudentService {
        studentRepository.addStudent(s);
     }
 
+    public void addTeacherToStudent(String student ,String teacher){
+        Student s=studentRepository.getByName(student);
+        s.getTeachers().add(teacher);
+        //studentRepository.addStudentToTeacher(student,teacher);
+    }
+
 
 }
