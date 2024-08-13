@@ -9,8 +9,6 @@ public class Student {
     private int age;
     private double averageScore;
 
-    List<String> teachers=new ArrayList<>();
-
     public Student(){
 
     }
@@ -19,8 +17,8 @@ public class Student {
         this.name = name;
         this.age = age;
         this.averageScore = averageScore;
-        this.teachers.add("");
     }
+
 
     public String getName() {
         return name;
@@ -44,13 +42,5 @@ public class Student {
 
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
-    }
-
-    public List<String> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<String> teachers) {
-        this.teachers = teachers;
     }
 }

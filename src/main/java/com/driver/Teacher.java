@@ -10,7 +10,6 @@ public class Teacher {
     private int numberOfStudents;
 
     private int age;
-    private List<String> students=new ArrayList<>();
 
     public Teacher() {
 
@@ -20,8 +19,8 @@ public class Teacher {
         this.name = name;
         this.numberOfStudents = numberOfStudents;
         this.age = age;
-        this.students.add("");
     }
+
 
     public String getName() {
         return name;
@@ -45,13 +44,5 @@ public class Teacher {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public List<String> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<String> students) {
-        this.students = students;
     }
 }

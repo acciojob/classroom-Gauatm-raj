@@ -1,6 +1,7 @@
 package com.driver.service;
 
 import com.driver.Student;
+import com.driver.Teacher;
 import com.driver.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,24 +11,42 @@ import java.util.List;
 @Service
 public class StudentService {
 
-    @Autowired
-    StudentRepository studentRepository;
+    StudentRepository studentRepository = new StudentRepository();
 
-    public List<String> getAllStudent(){
-        return studentRepository.getAllStudent();
+    public void addStudent(Student student){
+        studentRepository.saveStudent(student);
     }
 
-    public Student getByName(String name){
-        return studentRepository.getByName(name);
-    }
-    public void addStudent(Student s){
-       studentRepository.addStudent(s);
+    public void addTeacher(Teacher teacher){
+        studentRepository.saveTeacher(teacher);
     }
 
-    public void addTeacherToStudent(String student ,String teacher){
-        Student s=studentRepository.getByName(student);
-        s.getTeachers().add(teacher);
-        //studentRepository.addStudentToTeacher(student,teacher);
+    public void createStudentTeacherPair(String student, String teacher){
+        studentRepository.saveStudentTeacherPair(student, teacher);
+    }
+
+    public Student findStudent(String studentName){
+        return studentRepository.findStudent(studentName);
+    }
+
+    public Teacher findTeacher(String teacherName){
+        return studentRepository.findTeacher(teacherName);
+    }
+
+    public List<String> findStudentsFromTeacher(String teacher){
+        return studentRepository.findStudentsFromTeacher(teacher);
+    }
+
+    public List<String> findAllStudents(){
+        return studentRepository.findAllStudents();
+    }
+
+    public void deleteTeacher(String teacher){
+        studentRepository.deleteTeacher(teacher);
+    }
+
+    public void deleteAllTeachers(){
+        studentRepository.deleteAllTeachers();
     }
 
 

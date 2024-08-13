@@ -13,36 +13,104 @@ import java.util.List;
 public class StudentRepository {
 
 
-
-    HashMap<String, Student> studentDB;
-
-
+    private HashMap<String, Student> studentMap;
+    private HashMap<String, Teacher> teacherMap;
+    private HashMap<String, List<String>> teacherStudentMapping;
 
     public StudentRepository(){
-        studentDB=new HashMap<>();
+        this.studentMap = new HashMap<String, Student>();
+        this.teacherMap = new HashMap<String, Teacher>();
+        this.teacherStudentMapping = new HashMap<String, List<String>>();
     }
 
-    public List<String> getAllStudent(){
-        List<String> students=new ArrayList<>();
-        for(String name: studentDB.keySet()){
-            students.add(name);
+    public void saveStudent(Student student){
+        // your code goes here
+        String key = student.getName();
+        studentMap.put(key,student);
+
+    }
+
+    public void saveTeacher(Teacher teacher){
+        // your code goes here
+        String key = teacher.getName();
+        teacherMap.put(key,teacher);
+    }
+
+    public void saveStudentTeacherPair(String student, String teacher){
+        if(studentMap.containsKey(student) && teacherMap.containsKey(teacher)){
+            // your code goes here
+            if(teacherStudentMapping.containsKey(teacher)){
+                List<String> studentList = teacherStudentMapping.get(teacher);
+                studentList.add(student);
+                teacherStudentMapping.put(teacher,studentList);
+            }else{
+                List<String> newStudentList = new ArrayList<>();
+                newStudentList.add(student);
+                teacherStudentMapping.put(teacher,newStudentList);
+            }
+
         }
-         return students;
+
     }
 
-   public Student getByName(String name){
-        return studentDB.get(name);
-   }
+    public Student findStudent(String student){
+        // your code goes here
+        if(studentMap.containsKey(student)) {
+            return studentMap.get(student);
+        }
+        return null;
+    }
 
-   public void addStudent(Student s){
-      String name=s.getName();
-      studentDB.put(name,s);
-   }
+    public Teacher findTeacher(String teacher){
+        // your code goes here
+        if(teacherMap.containsKey(teacher)){
+            return teacherMap.get(teacher);
+        }
+        return null;
+    }
 
-//   public void addStudentToTeacher(String student,String teacher){
-//        Student s=studentDB.get(student);
-//        s.getTeachers().add(teacher);
-//   }
+    public List<String> findStudentsFromTeacher(String teacher){
+        // your code goes here
+        // find student list corresponding to a teacher
 
+        if(teacherStudentMapping.containsKey(teacher)){
+            return teacherStudentMapping.get(teacher);
+        }
+        return null;
+    }
 
+    public List<String> findAllStudents(){
+        // your code goes here
+        List<String> allStudentsList = new ArrayList<>();
+
+        for(Student student : studentMap.values()){
+            allStudentsList.add(student.getName());
+        }
+        return allStudentsList;
+    }
+
+    public void deleteTeacher(String teacher){
+        // your code goes here
+        List<String> studentsList = findStudentsFromTeacher(teacher);
+
+        for(String student : studentsList){
+            studentMap.remove(student);
+        }
+        if(teacherMap.containsKey(teacher)) {
+            teacherMap.remove(teacher);
+            teacherStudentMapping.remove(teacher);
+        }
+
+    }
+
+    public void deleteAllTeachers(){
+        // your code goes here
+        List<String> teachersList = new ArrayList<>();
+        for(Teacher teacher : teacherMap.values()){
+            teachersList.add(teacher.getName());
+        }
+        for(String teacher : teachersList){
+            deleteTeacher(teacher);
+        }
+    }
 }
