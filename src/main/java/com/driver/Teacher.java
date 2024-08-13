@@ -1,8 +1,5 @@
 package com.driver;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Teacher {
 
     private String name;
@@ -16,11 +13,11 @@ public class Teacher {
     }
 
     public Teacher(String name, int numberOfStudents, int age) {
+        super();
         this.name = name;
         this.numberOfStudents = numberOfStudents;
         this.age = age;
     }
-
 
     public String getName() {
         return name;
@@ -45,4 +42,6 @@ public class Teacher {
     public void setAge(int age) {
         this.age = age;
     }
+
+
 }

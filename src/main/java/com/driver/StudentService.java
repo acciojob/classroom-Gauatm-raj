@@ -1,17 +1,15 @@
-package com.driver.service;
+package com.driver;
 
-import com.driver.Student;
-import com.driver.Teacher;
-import com.driver.repository.StudentRepository;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class StudentService {
 
-    StudentRepository studentRepository = new StudentRepository();
+    @Autowired
+    StudentRepository studentRepository;
 
     public void addStudent(Student student){
         studentRepository.saveStudent(student);
@@ -48,6 +46,4 @@ public class StudentService {
     public void deleteAllTeachers(){
         studentRepository.deleteAllTeachers();
     }
-
-
 }

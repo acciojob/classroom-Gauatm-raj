@@ -2,7 +2,7 @@ package com.driver;
 
 import java.util.List;
 
-import com.driver.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,33 +19,42 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("students")
 public class StudentController {
 
-    StudentService studentService = new StudentService();
+    @Autowired
+    private StudentService studentService;
+
+
+
+    public StudentController(StudentService studentService) {
+        super();
+        this.studentService= studentService;
+    }
+
+    public StudentController() {
+
+    }
+
 
     @PostMapping("/add-student")
     public ResponseEntity<String> addStudent(@RequestBody Student student){
-
         studentService.addStudent(student);
         return new ResponseEntity<>("New student added successfully", HttpStatus.CREATED);
     }
 
     @PostMapping("/add-teacher")
     public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher){
-
         studentService.addTeacher(teacher);
         return new ResponseEntity<>("New teacher added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/add-student-teacher-pair")
     public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher){
-
         studentService.createStudentTeacherPair(student, teacher);
         return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/get-student-by-name/{name}")
     public ResponseEntity<Student> getStudentByName(@PathVariable String name){
-        Student student = studentService.findStudent(name); // Assign student by calling service layer method
-
+        Student student = studentService.findStudent(name);
         return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 
@@ -73,11 +82,23 @@ public class StudentController {
     @DeleteMapping("/delete-teacher-by-name")
     public ResponseEntity<String> deleteTeacherByName(@RequestParam String teacher){
         studentService.deleteTeacher(teacher);
+
         return new ResponseEntity<>(teacher + " removed successfully", HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-all-teachers")
     public ResponseEntity<String> deleteAllTeachers(){
-        studentService.deleteAllTeachers();
+        studentService.deleteAllTeachers() ;
+
         return new ResponseEntity<>("All teachers deleted successfully", HttpStatus.CREATED);
     }
+
+    public StudentService getStudentRepository() {
+        return studentService;
+    }
+
+    public void setStudentRepository(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+
 }

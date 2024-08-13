@@ -1,7 +1,6 @@
 package com.driver;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class Student {
 
@@ -13,7 +12,9 @@ public class Student {
 
     }
 
+
     public Student(String name, int age, double averageScore) {
+        super();
         this.name = name;
         this.age = age;
         this.averageScore = averageScore;
@@ -43,4 +44,5 @@ public class Student {
     public void setAverageScore(double averageScore) {
         this.averageScore = averageScore;
     }
+
 }
